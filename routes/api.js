@@ -9,12 +9,14 @@ module.exports = function (app) {
 
   app .route('/api/convert/')
       .get((req, res)=>{
-        console.log(req.query);
+        console.log(req.query.input);
 
         let input = req.query.input;
 
         let initNum = convertHandler.getNum(input);
         let initUnit = convertHandler.getUnit(input);    
+        console.log(initNum ," - ", initUnit);
+        console.log(convertHandler.getNum(input));
 
         if(!initNum && !initUnit) res.send("invalid Number&Unit")
         if(!initNum)  res.send("invalid Number")
@@ -23,7 +25,9 @@ module.exports = function (app) {
         let returnNum = convertHandler.convert(initNum, initUnit);
         let returnUnit = convertHandler.getReturnUnit(initUnit);
         let returnString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
-
+          console.log(initNum ," - ", initUnit);
+          console.log(returnString)
+        res.send(returnString);
 
       })
 
