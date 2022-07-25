@@ -41,10 +41,10 @@ function ConvertHandler() {
   this.spellOutUnit = function(initUnit) {
     let result =  initUnit == "km" ?  "kilometers" : 
                   initUnit == "mi" ? "miles"  :
-                  initUnit == "l"   ? "liters" :
+                  initUnit == "L"   ? "liters" :
                   initUnit == "gal"  ? "gallons" :
-                  initUnit == "lbs" ? "kilograms":
-                  initUnit == "kg" ? "pounds" : "not sure";;
+                  initUnit == "lbs" ? "pounds":
+                  initUnit == "kg" ? "kilograms" : "not sure";;
     
     return result;
   };
