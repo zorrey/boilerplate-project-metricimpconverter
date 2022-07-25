@@ -1,9 +1,13 @@
 function getNumUnit(info){
-  const regex = /([^\d*\.?\d+]|[^\d+\.?\d*]+)([a-zL]+)/;
-  let answer = info.match(regex);
-  let num = answer[0];
-  let unit = answer[1];
-  console.log(`num = ${number}; unit = ${unit}`);
+  const regexNum = /^\d*\.?\d+|^\d+\.?\d*/g;
+  const regexUnit = /([a-zA-Z]+)/g;
+  
+  let num = info.match(regexNum).toString();
+  let unit = info.match(regexUnit).toString();
+  let answer = [num , unit]
+
+  console.log("answer: ", answer);
+  console.log("num = ", num, "unit = " , unit);
   return answer;
 }
 
@@ -12,7 +16,7 @@ function ConvertHandler() {
   
   this.getNum = function(input) {
     let result = (getNumUnit(input))[0];
-    
+    console.log(parseFloat(result));
     return parseFloat(result);
   };
   
@@ -71,7 +75,7 @@ function ConvertHandler() {
 
 
     let result = `${initNum} ${this.spellOutUnit(initUnit)} convert to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
-    
+    console.log(result);
     return result;
   };
   
