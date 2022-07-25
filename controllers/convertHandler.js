@@ -41,7 +41,7 @@ function ConvertHandler() {
   this.spellOutUnit = function(initUnit) {
     let result =  initUnit == "km" ?  "kilometers" : 
                   initUnit == "mi" ? "miles"  :
-                  initUnit == "L"   ? "liters" :
+                  initUnit == "L" || initUnit=="l"  ? "liters" :
                   initUnit == "gal"  ? "gallons" :
                   initUnit == "lbs" ? "pounds":
                   initUnit == "kg" ? "kilograms" : "not sure";;
