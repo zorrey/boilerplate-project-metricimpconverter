@@ -2,8 +2,8 @@ const GetNumUnit = require('../controllers/getNumUnit.js');
 let getNumUnit = new GetNumUnit();
 function ConvertHandler() {
   
-  this.getNum = function(input) {  
-    if(getNumUnit.checkNum){
+  this.getNum = function(input) {      
+    if(getNumUnit.checkNum(input)){
     let result = ((getNumUnit.get(input))[0]).toFixed(5);
     console.log("getNum + parsefloat", parseFloat(result));
     return parseFloat(result);   
@@ -14,16 +14,16 @@ function ConvertHandler() {
   this.getUnit = function(input) {
    if(getNumUnit.checkUnit(input)) {
     let result = (getNumUnit.get(input))[1].toLowerCase();    
-    return result;
+    return result=="l" ? "L": result;
    }
-    else return null;
+    else return undefined;
   };
   
   this.getReturnUnit = function(initUnit) {
 
     let result = initUnit == "km"   ?  "mi" : 
                   initUnit == "mi"  ? "km"  :
-                  initUnit == "l"   ? "gal" :
+                  initUnit == "L"   ? "gal" :
                   initUnit == "gal" ? "L" :
                   initUnit == "lbs" ? "kg":
                   initUnit == "kg"  ? "lbs" : undefined;
@@ -52,16 +52,13 @@ function ConvertHandler() {
     switch (initUnit){
       case "km": result = initNum / miToKm; break; 
       case "mi": result = initNum * miToKm; break;
-      case "l": result = initNum / galToL; break;
+      case "L": result = initNum / galToL; break;
       case "gal": result = initNum * galToL; break;
       case "lbs": result = initNum * lbsToKg; break;
       case "kg": result = initNum / lbsToKg; break;
-      default: undefined;
-      
-    }
-    
-    
-    return parseFloat(result).toFixed(5);
+      default: undefined;      
+    }    
+    return parseFloat((result).toFixed(5));
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
