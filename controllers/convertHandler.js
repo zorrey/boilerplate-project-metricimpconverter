@@ -1,39 +1,32 @@
-function getNumUnit(info){
-  const regexNum = /^\d*\.?\d+|^\d+\.?\d*/g;
-  const regexUnit = /([a-zA-Z]+)/g;
-  
-  let num = info.match(regexNum).toString();
-  let unit = info.match(regexUnit).toString();
-  let answer = [num , unit]
-
-  console.log("answer: ", answer);
-  console.log("num = ", num, "unit = " , unit);
-  return answer;
-}
-
-
+const GetNumUnit = require('../controllers/getNumUnit.js');
+let getNumUnit = new GetNumUnit();
 function ConvertHandler() {
   
-  this.getNum = function(input) {
-    let result = (getNumUnit(input))[0];
-    console.log(parseFloat(result));
-    return parseFloat(result);
+  this.getNum = function(input) {  
+    if(getNumUnit.checkNum){
+    let result = ((getNumUnit.get(input))[0]).toFixed(5);
+    console.log("getNum + parsefloat", parseFloat(result));
+    return parseFloat(result);   
+    }
+    else return null;
   };
   
   this.getUnit = function(input) {
-    let result = (getNumUnit(input))[1].toLowerCase();
-    
+   if(getNumUnit.checkUnit(input)) {
+    let result = (getNumUnit.get(input))[1].toLowerCase();    
     return result;
+   }
+    else return null;
   };
   
   this.getReturnUnit = function(initUnit) {
 
-    let result = initUnit == "km" ?  "mi" : 
-                  initUnit == "mi" ? "km"  :
+    let result = initUnit == "km"   ?  "mi" : 
+                  initUnit == "mi"  ? "km"  :
                   initUnit == "l"   ? "gal" :
-                  initUnit == "gal"  ? "L" :
+                  initUnit == "gal" ? "L" :
                   initUnit == "lbs" ? "kg":
-                  initUnit == "kg" ? "lbs" : undefined;
+                  initUnit == "kg"  ? "lbs" : undefined;
     
     return result;
   };
@@ -44,7 +37,7 @@ function ConvertHandler() {
                   initUnit == "L" || initUnit=="l"  ? "liters" :
                   initUnit == "gal"  ? "gallons" :
                   initUnit == "lbs" ? "pounds":
-                  initUnit == "kg" ? "kilograms" : "not sure";;
+                  initUnit == "kg" ? "kilograms" : undefined;
     
     return result;
   };
@@ -74,8 +67,8 @@ function ConvertHandler() {
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
 
 
-    let result = `${initNum} ${this.spellOutUnit(initUnit)} convert to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
-    console.log(result);
+  let result = `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
+    console.log("getString result:",result);
     return result;
   };
   

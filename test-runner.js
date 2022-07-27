@@ -85,7 +85,7 @@ emitter.run = function() {
     throw(e);
   }
 };
-
+console.log(emitter)
 module.exports = emitter;
 
 /*
