@@ -27,6 +27,7 @@ suite('Unit Tests', function(){
     //#4
     test('fractional input with a decimal', function(done){
       let input = "4.2/2.1km";
+      console.log(convertHandler.getNum(input));
       assert.equal(convertHandler.getNum(input), 2);
       done();
     });

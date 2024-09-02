@@ -70,7 +70,7 @@ suite('Functional Tests', function() {
         .get('/api/convert')
         .query({input:'kg'})        
         .end(function (err, res, body) {
-          //console.log("body-------",res.body, "text-----",res.text)
+          console.log("body-------",res.body, "text-----",res.text)
           assert.equal(res.status, 200);
           assert.equal(res.body.initNum, 1 );
           assert.equal(res.body.initUnit, 'kg' );
